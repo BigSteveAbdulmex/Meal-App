@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:meal_app/screens/categories.dart';
+import 'package:meal_app/screens/meals.dart';
 
-class Tabs extends StatefulWidget {
-  const Tabs({super.key});
+class TabsScreen extends StatefulWidget {
+  const TabsScreen({super.key});
 
   @override
-  State<Tabs> createState() {
+  State<TabsScreen> createState() {
     return _TabsState();
   }
 }
 
-class _TabsState extends State<Tabs> {
+class _TabsState extends State<TabsScreen> {
   int _selectedPageIndex = 0;
 
   void _selectPage(int index) {
@@ -22,14 +23,21 @@ class _TabsState extends State<Tabs> {
   @override
   Widget build(BuildContext context) {
     Widget activePage = CategoriesScreen();
+    var activePageTitle = 'Categories';
+
+    if (_selectedPageIndex == 1) {
+      activePage = const MealsScreen(meals: []);
+      activePageTitle = 'Your Favourites';
+    }
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Dynamic'),
+        title: Text(activePageTitle),
       ),
-      body: const Placeholder(),
+      body: activePage,
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage,
+        currentIndex: _selectedPageIndex,
         items: const [
           BottomNavigationBarItem(
               icon: Icon(Icons.set_meal), label: 'Categories'),
