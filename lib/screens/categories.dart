@@ -85,8 +85,8 @@ class _CategoriesScreenState extends State<CategoriesScreen>
           end: Offset(0, 0),
         ).animate(
           CurvedAnimation(
-            parent: parent,
-            curve: curve,
+            parent: _animationController,
+            curve: Curves.easeInOut,
           ),
         ),
         child: child,
